@@ -1,3 +1,5 @@
+import { signupUser } from '../fetch-utils.js';
+
 const signInForm = document.getElementById('sign-in');
 
 const signUpForm = document.getElementById('sign-up');

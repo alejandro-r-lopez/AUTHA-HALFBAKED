@@ -18,11 +18,24 @@ export async function signUpUser(email, password) {
 }
 
 export async function signInUser(email, password) {
-    return client.auth.session() && client.auth.session().user;
+    const { data, error } = await client.auth.signIn({
+        email: email,
+        password: password,
+    });
+
+    return data;
 }
 
-export async function checkAuth() {}
+export async function checkAuth() {
+    const user = await getUser();
+
+    if (!user) location.replace('/');
+}
 
 export async function redirectIfLoggedIn() {}
 
-export async function logout() {}
+export async function logout() {
+    const response = await client.auth.signOut();
+
+    return response.error;
+}

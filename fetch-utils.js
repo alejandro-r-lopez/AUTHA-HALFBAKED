@@ -1,4 +1,5 @@
 // Enter Supabase Information
+
 const SUPABASE_URL = 'https://xdcizxdidpizfiibmgtv.supabase.co';
 const SUPABASE_KEY =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhkY2l6eGRpZHBpemZpaWJtZ3R2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQyNTc4NzYsImV4cCI6MTk4OTgzMzg3Nn0.1AGjiVrmIV6AJNyKnEOyeRjAP87L4_WcL4ZIjmI2sIY';
@@ -32,10 +33,13 @@ export async function checkAuth() {
     if (!user) location.replace('/');
 }
 
-export async function redirectIfLoggedIn() {}
+export async function redirectIfLoggedIn() {
+    if (await getUser()) {
+        window.location = '/other-page';
+    }
+}
 
 export async function logout() {
-    const response = await client.auth.signOut();
-
-    return response.error;
+    await client.auth.signOut();
+    window.location = '/';
 }

@@ -23,13 +23,11 @@ export async function signInUser(email, password) {
         email: email,
         password: password,
     });
-
     return data;
 }
 
 export async function checkAuth() {
     const user = await getUser();
-
     if (!user) location.replace('/');
 }
 
